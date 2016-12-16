@@ -9,8 +9,8 @@ AnagrammeSolver::AnagrammeSolver(std::string pFileName)
 void AnagrammeSolver::fillMap()
 {
 	std::cout << "Generating dictionnary..." << std::endl;
-	std::ifstream file(fileName);
 
+	std::ifstream file(fileName);
 	assert(file.is_open());
 
 	std::string word;
@@ -20,6 +20,7 @@ void AnagrammeSolver::fillMap()
 		std::sort(sortedWord.begin(), sortedWord.end());
 		dictionnary.insert({ sortedWord, word });
 	}
+	file.close();
 }
 
 std::string AnagrammeSolver::solveWithDictionnary(std::string word)
@@ -33,9 +34,11 @@ std::string AnagrammeSolver::solveWithDictionnary(std::string word)
 	std::unordered_multimap<std::string, std::string>::iterator it;
 
 	std::string res = "";
+
 	for (it = range.first; it != range.second; it++)
 	{
 		res += it->second + "\n";
 	}
+
 	return res;
 }
