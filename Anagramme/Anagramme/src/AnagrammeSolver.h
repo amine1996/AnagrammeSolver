@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <assert.h>
 #include <regex>
+#include <vector>
 
 class AnagrammeSolver
 {
@@ -17,6 +18,7 @@ class AnagrammeSolver
 
 	public:
 		AnagrammeSolver(std::string pFileName);
-		std::string solveWithDictionnary(std::string word);
+		std::vector<std::string> solveWithDictionnary(std::string pWord);
+		std::vector<std::string> solveWithoutDictionnary(std::string pWord);
 };
 

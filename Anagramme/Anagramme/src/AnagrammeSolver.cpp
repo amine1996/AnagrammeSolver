@@ -23,8 +23,9 @@ void AnagrammeSolver::fillMap()
 	file.close();
 }
 
-std::string AnagrammeSolver::solveWithDictionnary(std::string word)
+std::vector<std::string> AnagrammeSolver::solveWithDictionnary(std::string pWord)
 {
+	std::string word = pWord;
 	assert(std::regex_match(word, std::regex("[a-zA-Z]*")));
 
 	std::transform(word.begin(), word.end(), word.begin(), ::tolower);
@@ -33,12 +34,29 @@ std::string AnagrammeSolver::solveWithDictionnary(std::string word)
 	auto range = dictionnary.equal_range(word);
 	std::unordered_multimap<std::string, std::string>::iterator it;
 
-	std::string res = "";
+	std::vector<std::string> res;
 
 	for (it = range.first; it != range.second; it++)
-	{
-		res += it->second + "\n";
-	}
+		res.push_back(it->second);
 
 	return res;
+}
+
+std::vector<std::string> AnagrammeSolver::solveWithoutDictionnary(std::string pWord)
+{
+	std::string word = pWord;
+	assert(std::regex_match(word, std::regex("[a-zA-Z]*")));
+
+	std::vector<std::string> wordVec;
+
+	std::sort(word.begin(), word.end());
+	wordVec.push_back(word);
+	
+	while (std::next_permutation(word.begin(), word.end()))
+	{
+		wordVec.push_back(word);
+	} 
+
+		
+	return wordVec;
 }
